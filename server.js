@@ -21,12 +21,18 @@ app.get('/hello', function(req, res){
   res.json({greetings: "Hello, API"});
 });
 
-app.post('/api/fileanalyze', upload.single('upfile') , async(req, res)=>{
+app.post('/api/fileanalyse', upload.single('upfile') , async(req, res)=>{
   try{
-    
+    let {originalname, size} = req.file;
+    return res.json({
+      filename: originalname,
+      size
+    })
   }
   catch(err){
-    errror: err.message
+    return res.json({
+      errror: err.message
+    });
   }
 })
 
